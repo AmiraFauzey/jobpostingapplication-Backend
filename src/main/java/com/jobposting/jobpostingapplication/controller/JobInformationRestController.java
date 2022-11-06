@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,8 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.jobposting.jobpostingapplication.model.JobInformation;
 import com.jobposting.jobpostingapplication.service.JobInformationService;
 
+@CrossOrigin
 @RestController
-@RequestMapping(value="/jobInformation")
+@RequestMapping(value = "/jobInformation")
 public class JobInformationRestController {
 
 	@Autowired
@@ -28,7 +30,7 @@ public class JobInformationRestController {
 	// insert job into database
 
 	@PutMapping(value = "/job")
-	public ResponseEntity<JobInformation> createJob(@RequestBody JobInformation jobInformation){
+	public ResponseEntity<JobInformation> createJob(@RequestBody JobInformation jobInformation) {
 
 		JobInformation saveJob = jobInformationService.createJob(jobInformation);
 		return new ResponseEntity<>(saveJob, HttpStatus.CREATED);
@@ -41,8 +43,9 @@ public class JobInformationRestController {
 
 	// update job
 	@PostMapping(value = "/job/{jobId}")
-	public ResponseEntity<JobInformation> updateJob(@PathVariable Integer jobId, @RequestBody JobInformation jobInformation){
-        jobInformation.setJobId(jobId);
+	public ResponseEntity<JobInformation> updateJob(@PathVariable Integer jobId,
+			@RequestBody JobInformation jobInformation) {
+		jobInformation.setJobId(jobId);
 		JobInformation jobInfo = jobInformationService.updateJob(jobInformation);
 
 		return new ResponseEntity<>(jobInfo, HttpStatus.OK);
@@ -59,8 +62,8 @@ public class JobInformationRestController {
 	@GetMapping(value = "/job")
 	public ResponseEntity<List<JobInformation>> getAlldata() {
 		List<JobInformation> listOfJobs = jobInformationService.getAllJobInfo();
-		if(listOfJobs.isEmpty()) {
-			 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		if (listOfJobs.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 		return new ResponseEntity<>(listOfJobs, HttpStatus.OK);
 	}
@@ -71,13 +74,14 @@ public class JobInformationRestController {
 		JobInformation result = jobInformationService.findByJobId(jobId);
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
-	
+
 	// Get filter data result
 
 	@PostMapping(value = "/job")
-	public ResponseEntity<List<JobInformation>> getJobs(@RequestParam ("pageSize") Integer pageSize, @RequestParam("pageNumber") Integer pageNumber) {
-		List<JobInformation> result = jobInformationService.findAll(pageSize,pageNumber);
+	public ResponseEntity<List<JobInformation>> getJobs(@RequestParam("pageSize") Integer pageSize,
+			@RequestParam("pageNumber") Integer pageNumber) {
+		List<JobInformation> result = jobInformationService.findAll(pageSize, pageNumber);
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
-	 
+
 }
