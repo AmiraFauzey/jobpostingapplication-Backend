@@ -56,6 +56,9 @@ public class JobInformation {
 	
 	@Column(name="pay_by")
 	private String payBy;
+
+	@Column(name="amount")
+	private String amount;
 	
 	@OneToMany
 	@JoinTable(name="supplemental_pay", joinColumns = @JoinColumn(name="job_id"),
