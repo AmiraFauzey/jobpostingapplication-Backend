@@ -54,11 +54,8 @@ public class JobInformation {
 	@Column(name="job_rate")
 	private String jobRate;
 	
-	@Column(name="resume")
-	private Integer resume;
-	
-	@Column(name="application_deadline")
-	private Integer applicationDeadline;
+	@Column(name="pay_by")
+	private String payBy;
 	
 	@OneToMany
 	@JoinTable(name="supplemental_pay", joinColumns = @JoinColumn(name="job_id"),
