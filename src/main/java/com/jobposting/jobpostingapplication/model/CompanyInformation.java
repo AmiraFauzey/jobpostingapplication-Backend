@@ -33,4 +33,10 @@ public class CompanyInformation {
 	
 	@Column(name="company_location")
 	private String companyLocation;
+
+	@Column(name="company_language")
+	private String companyLanguage;
+
+	@Column(name="company_country")
+	private String companyCountry;
 }
