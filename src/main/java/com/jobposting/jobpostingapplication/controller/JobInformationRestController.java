@@ -3,6 +3,7 @@ package com.jobposting.jobpostingapplication.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.jobposting.jobpostingapplication.model.JobInformation;
+import com.jobposting.jobpostingapplication.service.JobInformationSearchService;
 import com.jobposting.jobpostingapplication.service.JobInformationService;
 
 @CrossOrigin
@@ -26,6 +28,9 @@ public class JobInformationRestController {
 
 	@Autowired
 	JobInformationService jobInformationService;
+
+	@Autowired
+	JobInformationSearchService jobinfoSearchSvc;
 
 	// insert job into database
 
@@ -83,5 +88,16 @@ public class JobInformationRestController {
 		List<JobInformation> result = jobInformationService.findAll(pageSize, pageNumber);
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
+
+	@GetMapping(value = "/job/search")
+	public ResponseEntity<Page<JobInformation>> getJobList(@RequestParam(name="jobTitle")String jobTitle,
+	@RequestParam(name="jobLocation")String jobLocation,
+	@RequestParam(name="page", defaultValue = "0", required = false) Integer page,
+	@RequestParam(name="count", defaultValue = "10", required=false) Integer count){
+
+		Page<JobInformation> result = jobinfoSearchSvc.getJobByJobTitleAndJobLocation(jobTitle,jobLocation,page,count);
+		return new ResponseEntity<>(result,HttpStatus.OK);
+	}
+
 
 }

@@ -7,11 +7,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="supplemental_pay_types")
 @Data
+@Table(name="supplemental_pay_types")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class SupplementalPayTypes {
 	
 	@Id

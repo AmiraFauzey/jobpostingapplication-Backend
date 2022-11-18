@@ -12,11 +12,17 @@ import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="job_information")
 @Data
+@Table(name="job_information")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class JobInformation {
 
 	@Id

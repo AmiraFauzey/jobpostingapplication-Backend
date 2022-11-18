@@ -7,11 +7,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="job_schedule_types")
 @Data
+@Table(name="job_schedule_types")
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class JobScheduleTypes {
 	
 	@Id
